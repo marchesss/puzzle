@@ -1,34 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Puzzle Game</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Purple Matrix — Puzzle</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Animated Intro / Splash -->
+  <div id="intro" class="intro">
+    <div class="intro-inner">
+      <h1 class="logo">PURPLE MATRIX</h1>
+      <p class="subtitle">Assemble the hero — собери пазл</p>
+      <div class="pulse-wrap">
+        <button id="enterBtn" class="btn neon">START</button>
+      </div>
+      <div class="hint">Click START or press <kbd>Enter</kbd></div>
+    </div>
+    <canvas id="matrixCanvas" class="matrix"></canvas>
+  </div>
 
-<div class="menu">
-    <h1>Choose Your Hero</h1>
+  <!-- Main App -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="brand">
+        <div class="dot"></div>
+        <div class="title">Purple Matrix — Puzzle</div>
+      </div>
 
-    <div class="image-list" id="imageList"></div>
+      <div class="controls">
+        <label class="select-label">Mode
+          <select id="mode">
+            <option value="3">3×3</option>
+            <option value="4" selected>4×4</option>
+            <option value="5">5×5</option>
+          </select>
+        </label>
 
-    <h2>Select Difficulty</h2>
-    <select id="difficulty">
-        <option value="3">Easy (3×3)</option>
-        <option value="4">Medium (4×4)</option>
-        <option value="5">Hard (5×5)</option>
-    </select>
+        <button id="startBtn" class="btn small neon">Start</button>
+        <button id="restartBtn" class="btn small">Restart</button>
+        <button id="solveBtn" class="btn small">Solve</button>
+        <button id="previewBtn" class="btn small">Preview</button>
+      </div>
+    </header>
 
-    <button id="startBtn">Start Puzzle</button>
-</div>
+    <main class="main">
+      <section class="left panel">
+        <div id="board" class="board" aria-label="Puzzle board"></div>
 
-<div class="game hidden">
-    <h2 id="heroName"></h2>
-    <canvas id="puzzleCanvas"></canvas>
-    <button id="backBtn">Back</button>
-</div>
+        <div class="status">
+          <div>Moves: <strong id="moves">0</strong></div>
+          <div>Time: <strong id="time">0s</strong></div>
+          <div>Pieces: <strong id="piecesCount">—</strong></div>
+        </div>
 
-<script src="script.js"></script>
+        <div class="tray-label">Tray — перетяни кусочек в слот</div>
+        <div id="tray" class="tray" aria-label="Pieces tray"></div>
+      </section>
+
+      <aside class="right panel">
+        <div class="preview">
+          <div class="preview-thumb"><img id="selectedPreview" src="" alt="preview"></div>
+          <div class="preview-meta">
+            <div id="selTitle">Выбери изображение</div>
+            <div class="muted" id="selDesc">Кликни миниатюру ниже</div>
+          </div>
+        </div>
+
+        <div class="thumbs panel-inner" id="thumbs"></div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Win modal -->
+  <div id="overlay" class="overlay hidden">
+    <div class="modal">
+      <h2 id="resTitle">Собрано! 🎉</h2>
+      <p id="resText">Time — 0s · Moves — 0</p>
+      <div class="modal-actions">
+        <button id="playAgain" class="btn neon">Play again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
