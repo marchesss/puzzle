@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle Game</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="menu">
+    <h1>Choose Your Hero</h1>
+
+    <div class="image-list" id="imageList"></div>
+
+    <h2>Select Difficulty</h2>
+    <select id="difficulty">
+        <option value="3">Easy (3×3)</option>
+        <option value="4">Medium (4×4)</option>
+        <option value="5">Hard (5×5)</option>
+    </select>
+
+    <button id="startBtn">Start Puzzle</button>
+</div>
+
+<div class="game hidden">
+    <h2 id="heroName"></h2>
+    <canvas id="puzzleCanvas"></canvas>
+    <button id="backBtn">Back</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
