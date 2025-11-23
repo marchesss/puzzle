@@ -1,23 +1,23 @@
-const imageFolder = "images/";
+// Список твоих изображений
+const images = [
+    "photo_2025-11-23_20-34-14.jpg",
+    "photo_2025-11-23_20-34-22.jpg",
+    "photo_2025-11-23_20-34-28.jpg"
+];
 
 let selectedImage = null;
 
-async function loadImages() {
-    const response = await fetch(imageFolder);
-    const text = await response.text();
-
-    const fileNames = [...text.matchAll(/href="([^"]+\.(jpg|png|webp|jpeg))"/gi)]
-        .map(m => m[1]);
-
+// Показываем изображения в меню
+function loadImages() {
     const list = document.getElementById("imageList");
 
-    fileNames.forEach(name => {
+    images.forEach(name => {
         let div = document.createElement("div");
         div.className = "image-item";
         div.onclick = () => selectImage(name);
 
         let img = document.createElement("img");
-        img.src = imageFolder + name;
+        img.src = "images/" + name;
 
         div.appendChild(img);
         list.appendChild(div);
@@ -42,7 +42,6 @@ document.getElementById("startBtn").onclick = () => {
     }
 
     let difficulty = parseInt(document.getElementById("difficulty").value);
-
     startPuzzle("images/" + selectedImage, difficulty);
 };
 
@@ -51,7 +50,8 @@ document.getElementById("backBtn").onclick = () => {
     document.querySelector(".menu").classList.remove("hidden");
 };
 
-// Puzzle logic
+// ---------------- ПАЗЛ ------------------
+
 function startPuzzle(imgSrc, grid) {
     document.querySelector(".menu").classList.add("hidden");
     document.querySelector(".game").classList.remove("hidden");
@@ -68,7 +68,6 @@ function startPuzzle(imgSrc, grid) {
         canvas.height = size;
 
         const pieceSize = size / grid;
-
         let pieces = [];
 
         for (let y = 0; y < grid; y++) {
