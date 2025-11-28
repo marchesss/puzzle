@@ -1,30 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puzzle — Neon</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>(RE) Puzzle — by marchesssik & nantenka</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- MAIN SCREEN -->
+  <div id="screen-select" class="screen">
+    <div class="title-wrap">
+      <h1 class="logo">(RE) Puzzle</h1>
+      <p class="subtitle">Выбери героя и нажми PLAY</p>
+    </div>
 
-<div id="gallery" class="gallery">
-  <h1 class="neon-title">Выберите изображение</h1>
-  <div class="images">
-    <img src="images/photo_2025-11-23_20-34-14.jpg" class="select-img">
-    <img src="images/photo_2025-11-23_20-34-22.jpg" class="select-img">
-    <img src="images/photo_2025-11-23_20-34-28.jpg" class="select-img">
+    <div class="thumbs">
+      <div class="thumb" data-file="photo_2025-11-23_20-34-14.jpg">
+        <img src="images/photo_2025-11-23_20-34-14.jpg" alt="">
+      </div>
+      <div class="thumb" data-file="photo_2025-11-23_20-34-22.jpg">
+        <img src="images/photo_2025-11-23_20-34-22.jpg" alt="">
+      </div>
+      <div class="thumb" data-file="photo_2025-11-23_20-34-28.jpg">
+        <img src="images/photo_2025-11-23_20-34-28.jpg" alt="">
+      </div>
+    </div>
+
+    <div class="controls-select">
+      <label>Уровень:
+        <select id="levelSelect">
+          <option value="30">Easy — 30 pieces</option>
+          <option value="50" selected>Medium — 50 pieces</option>
+          <option value="80">Hard — 80 pieces</option>
+        </select>
+      </label>
+      <button id="playBtn" class="btn neon">PLAY</button>
+    </div>
   </div>
-</div>
 
-<div id="game" class="hidden">
-  <h2 class="neon-subtitle">Соберите пазл</h2>
+  <!-- GAME SCREEN -->
+  <div id="screen-game" class="screen hidden">
+    <header class="game-header">
+      <div class="left-controls">
+        <button id="shuffleBtn" class="btn">Перемешать</button>
+        <button id="showBtn" class="btn">Показать картинку</button>
+        <button id="backBtn" class="btn">Выбрать другой</button>
+      </div>
 
-  <button id="reshuffleBtn" class="btn neon">Перемешать ещё</button>
+      <div class="center-stats">
+        <div>Time: <span id="time">0s</span></div>
+        <div>Level: <span id="levelLabel">—</span></div>
+        <div>Placed: <span id="placed">0</span>/<span id="total">0</span></div>
+      </div>
 
-  <div id="puzzleBoard" class="board"></div>
-</div>
+      <div class="right-empty"></div>
+    </header>
 
-<script src="script.js"></script>
+    <main class="game-area">
+      <div id="boardWrap" class="board-wrap">
+        <div id="board" class="board"></div>
+        <canvas id="ghostCanvas" class="ghost"></canvas>
+      </div>
+
+      <aside class="pieces-area">
+        <div class="pieces-title">Pieces</div>
+        <div id="piecesContainer" class="pieces-container"></div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <div class="by">by marchesssik & nantenka</div>
+    </footer>
+  </div>
+
+  <!-- WIN MODAL -->
+  <div id="winModal" class="modal hidden">
+    <div class="modal-inner">
+      <h2>YOU WIN 🎉</h2>
+      <p id="finalText">Time — 0s · Level — </p>
+      <button id="replayBtn" class="btn neon">Play again</button>
+      <button id="toSelectBtn" class="btn">Back to menu</button>
+    </div>
+  </div>
+
+<script src="game.js"></script>
 </body>
 </html>
